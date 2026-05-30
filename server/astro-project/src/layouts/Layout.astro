@@ -1,0 +1,26 @@
+---
+import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
+import "../styles/global.css";
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | Documentación del parcial</title>
+  </head>
+  <body>
+    <main class="container mx-auto max-w-6xl pt-20">
+      <h1 class="text-5xl font-bold">Documentación del parcial</h1>
+      <Navigation />
+      <slot />
+      <Footer />
+    </main>
+  </body>
+</html>

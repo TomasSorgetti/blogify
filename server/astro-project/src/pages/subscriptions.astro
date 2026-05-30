@@ -1,0 +1,20 @@
+---
+import Request from "../components/ui/Request.astro";
+import { HttpMethod } from "../types/http";
+import Layout from "../layouts/Layout.astro";
+import { emptyInput, getMySubscriptionsResponse } from "../data/subscriptions";
+---
+
+<Layout title="Subscriptions">
+  <h2 class="text-3xl mt-20">Subscriptions</h2>
+  <div class="space-y-20 mt-10">
+    <Request
+      method={HttpMethod.GET}
+      url="/api/subscriptions/me"
+      previewJSON={emptyInput}
+      Response={getMySubscriptionsResponse}
+      credentialsInclude
+      status={200}
+    />
+  </div>
+</Layout>

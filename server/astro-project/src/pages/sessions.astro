@@ -1,0 +1,32 @@
+---
+import Request from "../components/ui/Request.astro";
+import { HttpMethod } from "../types/http";
+import Layout from "../layouts/Layout.astro";
+import {
+  emptyInput,
+  getAllResponse,
+  deleteAllSessionsResponse,
+} from "../data/sessions";
+---
+
+<Layout title="Sessions">
+  <h2 class="text-3xl mt-20">Sessions</h2>
+  <div class="space-y-20 mt-10">
+    <Request
+      method={HttpMethod.GET}
+      url="/api/sessions"
+      previewJSON={emptyInput}
+      Response={getAllResponse}
+      credentialsInclude
+      status={200}
+    />
+    <Request
+      method={HttpMethod.DELETE}
+      url="/api/sessions"
+      previewJSON={emptyInput}
+      Response={deleteAllSessionsResponse}
+      credentialsInclude
+      status={201}
+    />
+  </div>
+</Layout>

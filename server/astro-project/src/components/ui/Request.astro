@@ -1,0 +1,195 @@
+---
+import { HttpMethod } from "../../types/http";
+import Method from "./Method.astro";
+import Status from "./Status.astro";
+
+export interface Props {
+  method: HttpMethod;
+  url: string;
+  previewJSON?: any;
+  Response?: any;
+  useQuery?: boolean;
+  credentialsInclude?: boolean;
+  status: number;
+}
+
+const {
+  method = HttpMethod.GET,
+  url = "/api/",
+  previewJSON = {},
+  Response = {},
+  useQuery = false,
+  credentialsInclude = false,
+  status = 200,
+} = Astro.props;
+
+const formattedPreviewJSON: string = JSON.stringify(previewJSON, null, 2);
+const formattedResponseJSON: string = JSON.stringify(Response, null, 2);
+---
+
+<div class="mt-10 json-toggle-component">
+  <div class="w-full flex items-center justify-between">
+    <p class="flex items-center gap-20">
+      <Method method={method} />
+      {url}
+    </p>
+    {
+      credentialsInclude && (
+        <p class="text-red-500 relative">
+          Credentials include needed{" "}
+          <span class="italic text-xs text-gray-500 absolute -bottom-3 left-0 w-full text-center">
+            (automatic in postman)
+          </span>
+        </p>
+      )
+    }
+    <button
+      class="toggle-button px-6 py-3 bg-blue-500 rounded text-white cursor-pointer"
+      data-preview-json={formattedPreviewJSON}
+      data-response-json={formattedResponseJSON}
+      data-use-query={useQuery ? "true" : "false"}
+    >
+      Ver respuesta
+    </button>
+  </div>
+  <pre
+    class="json-pre relative w-full bg-gray-800 min-h-60 rounded mt-10 p-12 text-white overflow-hidden">
+    <div class="absolute top-0 right-10">
+      <Status status={status} />
+    </div>
+    {useQuery ? (
+      <table class="query-table">
+        <thead>
+          <tr>
+            Query Params
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(previewJSON).map(([key, value]) => (
+            <tr>
+              <td>{key}</td>
+              <td>{typeof value === "object" ? JSON.stringify(value) : String(value)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <span class="json-content">{formattedPreviewJSON}</span>
+    )}
+  </pre>
+</div>
+
+<style>
+  .query-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+
+  .query-table th,
+  .query-table td {
+    border: 1px solid #4b5563;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    vertical-align: top;
+    overflow: hidden;
+    max-width: 25rem;
+  }
+
+  .query-table thead th {
+    background-color: #1f2937;
+    color: #f9fafb;
+    font-weight: 600;
+  }
+
+  .json-content,
+  .query-table {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .json-content.fade,
+  .query-table.fade {
+    opacity: 0;
+  }
+
+  .toggle-button {
+    transition: all 0.3s ease;
+  }
+</style>
+
+<script>
+  document.querySelectorAll(".json-toggle-component").forEach((component) => {
+    const button = component.querySelector(
+      ".toggle-button"
+    ) as HTMLButtonElement;
+    const pre = component.querySelector(".json-pre") as HTMLPreElement;
+    let content = pre.querySelector(
+      ".json-content, .query-table"
+    ) as HTMLElement;
+
+    const previewJSON: string = button.dataset.previewJson || "{}";
+    const responseJSON: string = button.dataset.responseJson || "{}";
+    const useQuery: boolean = button.dataset.useQuery === "true";
+
+    let isShowingResponse: boolean = false;
+
+    button.addEventListener("click", () => {
+      content.classList.add("fade");
+
+      setTimeout(() => {
+        if (isShowingResponse) {
+          if (useQuery) {
+            const table = document.createElement("table");
+            table.className = "query-table";
+            let tableBody = "";
+            try {
+              const parsedPreview = JSON.parse(previewJSON);
+              tableBody = Object.entries(parsedPreview)
+                .map(
+                  ([key, value]) =>
+                    `<tr><td>${key}</td><td>${
+                      typeof value === "object"
+                        ? JSON.stringify(value)
+                        : String(value)
+                    }</td></tr>`
+                )
+                .join("");
+            } catch (e) {
+              tableBody = `<tr><td>error</td><td>Invalid JSON</td></tr>`;
+            }
+            table.innerHTML = `
+              <thead>
+                <tr>
+                  Query Params
+                </tr>
+              </thead>
+              <tbody>${tableBody}</tbody>
+            `;
+            pre.innerHTML = "";
+            pre.appendChild(table);
+          } else {
+            const span = document.createElement("span");
+            span.className = "json-content";
+            span.textContent = previewJSON;
+            pre.innerHTML = "";
+            pre.appendChild(span);
+          }
+          button.textContent = "Ver respuesta";
+        } else {
+          const span = document.createElement("span");
+          span.className = "json-content";
+          span.textContent = responseJSON;
+          pre.innerHTML = "";
+          pre.appendChild(span);
+          button.textContent = "Ocultar respuesta";
+        }
+        content = pre.querySelector(
+          ".json-content, .query-table"
+        ) as HTMLElement;
+        content.classList.remove("fade");
+        isShowingResponse = !isShowingResponse;
+      }, 300);
+    });
+  });
+</script>

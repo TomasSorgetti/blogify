@@ -1,0 +1,161 @@
+@keyframes flow-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(100vw + 400px));
+  }
+}
+@keyframes flow-down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(100vh + 300px));
+  }
+}
+@keyframes dash-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -36;
+  }
+}
+@keyframes dash-flow-reverse {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 36;
+  }
+}
+@keyframes float-gentle {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(8px, -12px);
+  }
+}
+@keyframes float-gentle-2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-6px, -10px);
+  }
+}
+@keyframes float-gentle-3 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(5px, -8px);
+  }
+}
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse-node {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.4);
+  }
+}
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+.animate-flow-right-1 {
+  animation: flow-right 14s linear infinite;
+}
+.animate-flow-right-2 {
+  animation: flow-right 18s linear infinite 3s;
+}
+.animate-flow-right-3 {
+  animation: flow-right 16s linear infinite 6s;
+}
+.animate-flow-right-4 {
+  animation: flow-right 20s linear infinite 9s;
+}
+
+.animate-flow-down-1 {
+  animation: flow-down 12s linear infinite;
+}
+.animate-flow-down-2 {
+  animation: flow-down 16s linear infinite 4s;
+}
+.animate-flow-down-3 {
+  animation: flow-down 14s linear infinite 2s;
+}
+.animate-flow-down-4 {
+  animation: flow-down 18s linear infinite 7s;
+}
+
+.animate-dash-flow {
+  animation: dash-flow 4s linear infinite;
+}
+.animate-dash-flow-reverse {
+  animation: dash-flow-reverse 4s linear infinite;
+}
+
+.animate-float-gentle-1 {
+  animation: float-gentle 10s ease-in-out infinite;
+}
+.animate-float-gentle-2 {
+  animation: float-gentle-2 12s ease-in-out infinite 2s;
+}
+.animate-float-gentle-3 {
+  animation: float-gentle-3 14s ease-in-out infinite 4s;
+}
+
+.animate-orbit {
+  animation: orbit 40s linear infinite;
+  transform-origin: 88% 28%;
+}
+.animate-rotate-slow {
+  animation: rotate-slow 25s linear infinite;
+}
+
+.animate-pulse-node {
+  animation: pulse-node 5s ease-in-out infinite;
+}
+.animate-pulse-node-delay-1 {
+  animation: pulse-node 5s ease-in-out infinite 1.5s;
+}
+.animate-pulse-node-delay-2 {
+  animation: pulse-node 5s ease-in-out infinite 3s;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}

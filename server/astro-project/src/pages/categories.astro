@@ -1,0 +1,52 @@
+---
+import Request from "../components/ui/Request.astro";
+import { HttpMethod } from "../types/http";
+import Layout from "../layouts/Layout.astro";
+import {
+  emptyInput,
+  createCategoryInput,
+  getAllCategoriesResponse,
+  updateCategoryInput,
+  createCategoryResponse,
+  updateCategoryResponse,
+  deleteCategoryResponse,
+} from "../data/categories";
+---
+
+<Layout title="Categories">
+  <h2 class="text-3xl mt-20">Categories</h2>
+  <div class="space-y-20 mt-10">
+    <Request
+      method={HttpMethod.GET}
+      url="/api/categories"
+      previewJSON={emptyInput}
+      Response={getAllCategoriesResponse}
+      credentialsInclude
+      status={200}
+    />
+    <Request
+      method={HttpMethod.POST}
+      url="/api/categories"
+      previewJSON={createCategoryInput}
+      Response={createCategoryResponse}
+      credentialsInclude
+      status={201}
+    />
+    <Request
+      method={HttpMethod.PATCH}
+      url="/api/categories/:id"
+      previewJSON={updateCategoryInput}
+      Response={updateCategoryResponse}
+      credentialsInclude
+      status={201}
+    />
+    <Request
+      method={HttpMethod.DELETE}
+      url="/api/categories/:id"
+      previewJSON={emptyInput}
+      Response={deleteCategoryResponse}
+      credentialsInclude
+      status={201}
+    />
+  </div>
+</Layout>

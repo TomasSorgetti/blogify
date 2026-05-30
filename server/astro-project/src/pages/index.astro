@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+  registerBody,
+  registerResponse,
+  loginBody,
+  loginResponse,
+  verifyBody,
+  verifyResponse,
+  emptyInput,
+  refreshResponse,
+  logoutResponse,
+} from "../data/auth.js";
+import Request from "../components/ui/Request.astro";
+import { HttpMethod } from "../types/http";
+import AuthRoadmap from "../assets/auth_roadmap.webp";
+import { Image } from "astro:assets";
+---
+
+<Layout title="Authentication">
+  <h2 class="text-3xl mt-20">Authentication</h2>
+  <div class="space-y-20 mt-10">
+    <Request
+      method={HttpMethod.POST}
+      url="/api/auth/login"
+      previewJSON={loginBody}
+      Response={loginResponse}
+      status={200}
+    />
+    <Request
+      method={HttpMethod.POST}
+      url="/api/auth/register"
+      previewJSON={registerBody}
+      Response={registerResponse}
+      status={201}
+    />
+    <Request
+      method={HttpMethod.POST}
+      url="/api/auth/verify"
+      previewJSON={verifyBody}
+      Response={verifyResponse}
+      useQuery={true}
+      status={201}
+    />
+    <Request
+      method={HttpMethod.POST}
+      url="/api/auth/refresh"
+      previewJSON={emptyInput}
+      Response={refreshResponse}
+      credentialsInclude
+      status={201}
+    />
+    <Request
+      method={HttpMethod.POST}
+      url="/api/auth/logout"
+      previewJSON={emptyInput}
+      Response={logoutResponse}
+      credentialsInclude
+      status={200}
+    />
+    <Image
+      src={AuthRoadmap}
+      alt="authentication roadmap"
+      class="w-full h-auto"
+    />
+  </div>
+</Layout>

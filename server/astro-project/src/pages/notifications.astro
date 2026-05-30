@@ -1,0 +1,20 @@
+---
+import Request from "../components/ui/Request.astro";
+import { emptyInput, getMyNotificationsResponse } from "../data/notifications";
+import Layout from "../layouts/Layout.astro";
+import { HttpMethod } from "../types/http";
+---
+
+<Layout title="Notifications">
+  <h2 class="text-3xl mt-20">Notifications</h2>
+  <div class="space-y-20 mt-10">
+    <Request
+      method={HttpMethod.GET}
+      url="/api/notifications/me"
+      previewJSON={emptyInput}
+      Response={getMyNotificationsResponse}
+      credentialsInclude
+      status={200}
+    />
+  </div>
+</Layout>

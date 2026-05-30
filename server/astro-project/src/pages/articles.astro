@@ -1,0 +1,58 @@
+---
+import Request from "../components/ui/Request.astro";
+import { HttpMethod } from "../types/http";
+import {
+  emptyInput,
+  createArticleInput,
+  createArticleResponse,
+  getAllArticlesResponse,
+  updateArticleResponse,
+  deleteArticleResponse,
+  getArticleResponse,
+} from "../data/articles";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Articles">
+  <h2 class="text-3xl mt-20">Articles</h2>
+  <div class="space-y-20 mt-10">
+    <Request
+      method={HttpMethod.GET}
+      url="/api/articles"
+      previewJSON={emptyInput}
+      Response={getAllArticlesResponse}
+      status={200}
+    />
+    <Request
+      method={HttpMethod.GET}
+      url="/api/articles/:slug"
+      previewJSON={emptyInput}
+      Response={getArticleResponse}
+      status={200}
+    />
+    <Request
+      method={HttpMethod.POST}
+      url="/api/articles"
+      previewJSON={createArticleInput}
+      Response={createArticleResponse}
+      credentialsInclude
+      status={201}
+    />
+    <Request
+      method={HttpMethod.PATCH}
+      url="/api/articles/:slug"
+      previewJSON={createArticleInput}
+      Response={updateArticleResponse}
+      credentialsInclude
+      status={201}
+    />
+    <Request
+      method={HttpMethod.DELETE}
+      url="/api/articles/:slug"
+      previewJSON={emptyInput}
+      Response={deleteArticleResponse}
+      credentialsInclude
+      status={201}
+    />
+  </div>
+</Layout>

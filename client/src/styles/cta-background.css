@@ -1,0 +1,233 @@
+@keyframes cta-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes beam-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(100vw + 600px));
+  }
+}
+
+@keyframes beam-down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(100vh + 200px));
+  }
+}
+
+@keyframes corner-pulse {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(80px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(80px) rotate(-360deg);
+  }
+}
+
+@keyframes orbit-reverse {
+  0% {
+    transform: rotate(0deg) translateX(120px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg) translateX(120px) rotate(360deg);
+  }
+}
+
+@keyframes ring-expand {
+  0% {
+    r: 20;
+    opacity: 0.6;
+  }
+  100% {
+    r: 180;
+    opacity: 0;
+  }
+}
+
+@keyframes float-node {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(5px, -8px);
+  }
+  50% {
+    transform: translate(-3px, -12px);
+  }
+  75% {
+    transform: translate(-6px, -5px);
+  }
+}
+
+@keyframes connections-pulse {
+  0%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.1;
+  }
+  50% {
+    stroke-dashoffset: -24;
+    opacity: 0.25;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.5;
+  }
+  95% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(calc(100% + 10px));
+    opacity: 0;
+  }
+}
+
+.animate-cta-pulse {
+  animation: cta-pulse 4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-beam-right-1 {
+  animation: beam-right 8s linear infinite;
+}
+.animate-beam-right-2 {
+  animation: beam-right 10s linear infinite 2s;
+}
+.animate-beam-right-3 {
+  animation: beam-right 12s linear infinite 4s;
+}
+
+.animate-beam-down-1 {
+  animation: beam-down 7s linear infinite;
+}
+.animate-beam-down-2 {
+  animation: beam-down 9s linear infinite 3s;
+}
+
+.animate-corner-pulse {
+  animation: corner-pulse 3s ease-in-out infinite;
+}
+.animate-corner-pulse-delay-1 {
+  animation: corner-pulse 3s ease-in-out infinite 0.75s;
+}
+.animate-corner-pulse-delay-2 {
+  animation: corner-pulse 3s ease-in-out infinite 1.5s;
+}
+.animate-corner-pulse-delay-3 {
+  animation: corner-pulse 3s ease-in-out infinite 2.25s;
+}
+
+.animate-orbit-1 {
+  animation: orbit 15s linear infinite;
+  transform-origin: 50% 50%;
+}
+.animate-orbit-2 {
+  animation: orbit-reverse 20s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.animate-ring-expand-1 {
+  animation: ring-expand 6s ease-out infinite;
+}
+.animate-ring-expand-2 {
+  animation: ring-expand 6s ease-out infinite 2s;
+}
+.animate-ring-expand-3 {
+  animation: ring-expand 6s ease-out infinite 4s;
+}
+
+.animate-float-node-1 {
+  animation: float-node 8s ease-in-out infinite;
+}
+.animate-float-node-2 {
+  animation: float-node 10s ease-in-out infinite 1s;
+}
+.animate-float-node-3 {
+  animation: float-node 9s ease-in-out infinite 2s;
+}
+.animate-float-node-4 {
+  animation: float-node 11s ease-in-out infinite 3s;
+}
+
+.animate-connections {
+  animation: connections-pulse 5s ease-in-out infinite;
+}
+
+.animate-scan {
+  animation: scan 8s ease-in-out infinite;
+}
+
+.animate-beam-down-left {
+  animation: beam-down 12s linear infinite;
+}
+.animate-beam-down-left-2 {
+  animation: beam-down 15s linear infinite 3s;
+}
+.animate-beam-down-right {
+  animation: beam-down 14s linear infinite 2s;
+}
+.animate-beam-down-right-2 {
+  animation: beam-down 16s linear infinite 5s;
+}
+
+.animate-float-left-1 {
+  animation: float-node 10s ease-in-out infinite;
+}
+.animate-float-left-2 {
+  animation: float-node 12s ease-in-out infinite 2s;
+}
+.animate-float-left-3 {
+  animation: float-node 14s ease-in-out infinite 4s;
+}
+.animate-float-right-1 {
+  animation: float-node 11s ease-in-out infinite 1s;
+}
+.animate-float-right-2 {
+  animation: float-node 13s ease-in-out infinite 3s;
+}
+.animate-float-right-3 {
+  animation: float-node 15s ease-in-out infinite 5s;
+}
+
+.animate-corner-left {
+  animation: corner-pulse 4s ease-in-out infinite;
+}
+.animate-corner-left-2 {
+  animation: corner-pulse 4s ease-in-out infinite 1s;
+}
+.animate-corner-right {
+  animation: corner-pulse 4s ease-in-out infinite 2s;
+}
+.animate-corner-right-2 {
+  animation: corner-pulse 4s ease-in-out infinite 3s;
+}

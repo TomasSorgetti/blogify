@@ -1,0 +1,20 @@
+---
+import Request from "../components/ui/Request.astro";
+import { HttpMethod } from "../types/http";
+import { emptyInput, profileResponse } from "../data/users";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Users">
+  <h2 class="text-3xl mt-20">Users</h2>
+  <div class="space-y-20 mt-10">
+    <Request
+      method={HttpMethod.GET}
+      url="/api/users/me"
+      previewJSON={emptyInput}
+      Response={profileResponse}
+      credentialsInclude
+      status={200}
+    />
+  </div>
+</Layout>
