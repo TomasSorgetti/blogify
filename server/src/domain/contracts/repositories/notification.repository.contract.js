@@ -1,4 +1,10 @@
+import { enforceContract } from "../contract.helper.js";
+
 export class NotificationRepositoryContract {
+  constructor() {
+    enforceContract(this, NotificationRepositoryContract);
+  }
+
   async findById(id) {
     throw new Error(`${this.constructor.name}: method [findById] must be implemented.`);
   }

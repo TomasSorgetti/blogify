@@ -1,4 +1,10 @@
+import { enforceContract } from "../contract.helper.js";
+
 export class WorkbenchRepositoryContract {
+  constructor() {
+    enforceContract(this, WorkbenchRepositoryContract);
+  }
+
   async findById(id) {
     throw new Error(`${this.constructor.name}: method [findById] must be implemented.`);
   }
@@ -41,5 +47,9 @@ export class WorkbenchRepositoryContract {
 
   async unarchiveMany(workbenchIds) {
     throw new Error(`${this.constructor.name}: method [unarchiveMany] must be implemented.`);
+  }
+
+  async countByOwner(userId) {
+    throw new Error(`${this.constructor.name}: method [countByOwner] must be implemented.`);
   }
 }

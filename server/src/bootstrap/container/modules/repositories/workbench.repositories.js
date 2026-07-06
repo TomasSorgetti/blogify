@@ -1,4 +1,4 @@
-import WorkbenchRepository from "../../../../infrastructure/database/repositories/workbench.repository.js";
+import WorkbenchRepository from "../../../../infrastructure/modules/workbench/workbench.repository.js";
 
 export const registerWorkbenchRepository = (container, models) => {
   container.register(

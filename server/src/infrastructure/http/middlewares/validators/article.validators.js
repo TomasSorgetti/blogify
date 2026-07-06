@@ -20,6 +20,10 @@ export default class ArticleValidation extends ValidationMiddleware {
         .optional()
         .isIn(["DRAFT", "PUBLISHED", "ARCHIVED"])
         .withMessage("Status must be DRAFT, PUBLISHED or ARCHIVED"),
+      query("language")
+        .optional()
+        .isLength({ min: 2, max: 5 })
+        .withMessage("Language must be a valid language code (e.g. 'en', 'es')"),
     ]);
   }
 
@@ -99,6 +103,10 @@ export default class ArticleValidation extends ValidationMiddleware {
         .optional()
         .isString()
         .withMessage("Each new category must be a string"),
+      body("language")
+        .optional()
+        .isLength({ min: 2, max: 5 })
+        .withMessage("Language must be a valid language code (e.g. 'en', 'es')"),
     ]);
   }
   static generateAiArticle() {
@@ -194,6 +202,17 @@ export default class ArticleValidation extends ValidationMiddleware {
   static unpublish() {
     return new ArticleValidation([
       param("slug").notEmpty().withMessage("Slug is required"),
+    ]);
+  }
+
+  static kanbanMove() {
+    return new ArticleValidation([
+      param("slug").notEmpty().withMessage("Slug is required"),
+      body("kanbanColumn")
+        .notEmpty()
+        .withMessage("kanbanColumn is required")
+        .isIn(["idea", "writing", "review", "published"])
+        .withMessage("kanbanColumn must be idea, writing, review or published"),
     ]);
   }
 

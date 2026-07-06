@@ -13,7 +13,7 @@ export const initializeConfig = async () => {
   const redisCacheClient = await connectRedis(envConfig.REDIS_URL);
   const stripe = connectStripe(envConfig.STRIPE_SECRET_KEY);
 
-  const aiClient = new GoogleGenAI(envConfig.GOOGLE_GENERATIVE_AI_API_KEY);
+  const aiClient = new GoogleGenAI({ apiKey: envConfig.GOOGLE_GENERATIVE_AI_API_KEY });
 
   return {
     db,

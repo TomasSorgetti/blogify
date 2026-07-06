@@ -1,4 +1,4 @@
-import ApiKeyController from "../../../../infrastructure/http/controllers/apikey.controller.js";
+import ApiKeyController from "../../../../infrastructure/modules/apikey/apikey.controller.js";
 
 export const registerApiKeyControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);

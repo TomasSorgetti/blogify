@@ -1,4 +1,4 @@
-import UserController from "../../../../infrastructure/http/controllers/user.controller.js";
+import UserController from "../../../../infrastructure/modules/user/user.controller.js";
 
 export const registerUserControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);

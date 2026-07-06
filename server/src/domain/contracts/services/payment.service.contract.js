@@ -1,4 +1,10 @@
+import { enforceContract } from "../contract.helper.js";
+
 export class PaymentServiceContract {
+  constructor() {
+    enforceContract(this, PaymentServiceContract);
+  }
+
   async createCheckoutSession(data) {
     throw new Error(`${this.constructor.name}: method [createCheckoutSession] must be implemented.`);
   }

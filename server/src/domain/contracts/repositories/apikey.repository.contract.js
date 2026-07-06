@@ -1,4 +1,10 @@
+import { enforceContract } from "../contract.helper.js";
+
 export class ApiKeyRepositoryContract {
+  constructor() {
+    enforceContract(this, ApiKeyRepositoryContract);
+  }
+
   async create(data) {
     throw new Error(`${this.constructor.name}: method [create] must be implemented.`);
   }
@@ -37,5 +43,9 @@ export class ApiKeyRepositoryContract {
 
   async regenerate(oldKey, newKey) {
     throw new Error(`${this.constructor.name}: method [regenerate] must be implemented.`);
+  }
+
+  async countByUser(userId) {
+    throw new Error(`${this.constructor.name}: method [countByUser] must be implemented.`);
   }
 }

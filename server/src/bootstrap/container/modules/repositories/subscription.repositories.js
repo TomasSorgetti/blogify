@@ -1,4 +1,4 @@
-import SubscriptionRepository from "../../../../infrastructure/database/repositories/subscription.repository.js";
+import SubscriptionRepository from "../../../../infrastructure/modules/subscription/subscription.repository.js";
 
 export const registerSubscriptionRepository = (container, models) => {
   container.register(

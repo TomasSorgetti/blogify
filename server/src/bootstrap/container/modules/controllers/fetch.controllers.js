@@ -1,4 +1,4 @@
-import FetchController from "../../../../infrastructure/http/controllers/fetch.controller.js";
+import FetchController from "../../../../infrastructure/modules/fetch/fetch.controller.js";
 
 export const registerFetchControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);

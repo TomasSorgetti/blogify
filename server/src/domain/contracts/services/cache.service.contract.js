@@ -1,4 +1,10 @@
+import { enforceContract } from "../contract.helper.js";
+
 export class CacheServiceContract {
+  constructor() {
+    enforceContract(this, CacheServiceContract);
+  }
+
   async get(key) {
     throw new Error(`${this.constructor.name}: method [get] must be implemented.`);
   }

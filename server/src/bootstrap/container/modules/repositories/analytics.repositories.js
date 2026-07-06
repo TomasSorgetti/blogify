@@ -1,4 +1,4 @@
-import AnalyticsRepository from "../../../../infrastructure/database/repositories/analytics.repository.js";
+import AnalyticsRepository from "../../../../infrastructure/modules/analytics/analytics.repository.js";
 
 export const registerAnalyticsRepository = (container) => {
   container.register("analyticsRepository", new AnalyticsRepository());

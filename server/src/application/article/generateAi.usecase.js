@@ -43,7 +43,7 @@ export default class GenerateAiArticleUseCase extends UseCaseContract {
         },
       });
 
-      console.log("RAW_TEXT_RECEIVED");
+      console.log("[AI] Generating article content...");
 
       let extracted = text.trim();
 
@@ -67,6 +67,7 @@ export default class GenerateAiArticleUseCase extends UseCaseContract {
         tags: object.tags.join(", "),
         categories: [],
         newCategories: object.categories,
+        language: object.language || "en",
         metaTitle: object.metaTitle,
         metaDescription: object.metaDescription,
         status: "draft",

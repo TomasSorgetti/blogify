@@ -11,6 +11,7 @@ export default class ArticleEntity {
   #status;
   #image;
   #isFeatured;
+  #language;
   #categories;
   #workbench;
   #isGlobal;
@@ -27,6 +28,7 @@ export default class ArticleEntity {
     status,
     image,
     isFeatured,
+    language,
     categories,
     workbench,
     isGlobal,
@@ -87,11 +89,19 @@ export default class ArticleEntity {
       });
     }
 
-    if (tags && typeof tags !== "string") {
-      throw new InvalidInputError("Tags must be a string", {
-        field: "tags",
-        code: ERROR_CODES.VALIDATION.INVALID_INPUT,
-      });
+    if (tags !== undefined && tags !== null) {
+      if (!Array.isArray(tags)) {
+        throw new InvalidInputError("Tags must be an array of strings", {
+          field: "tags",
+          code: ERROR_CODES.VALIDATION.INVALID_INPUT,
+        });
+      }
+      if (tags.some((t) => typeof t !== "string")) {
+        throw new InvalidInputError("Each tag must be a string", {
+          field: "tags",
+          code: ERROR_CODES.VALIDATION.INVALID_INPUT,
+        });
+      }
     }
 
     if (status && !["DRAFT", "PUBLISHED", "ARCHIVED"].includes(status)) {
@@ -133,10 +143,11 @@ export default class ArticleEntity {
     this.#content = content.trim();
     this.#summary = summary.trim();
     this.#author = author ? author.trim() : undefined;
-    this.#tags = tags ? tags.trim() : undefined;
+    this.#tags = Array.isArray(tags) ? tags : [];
     this.#status = status || "DRAFT";
     this.#image = image ? image.trim() : undefined;
     this.#isFeatured = isFeatured ?? false;
+    this.#language = language ? language.trim().toLowerCase() : "en";
     this.#categories = categories ?? [];
     this.#workbench = workbench ? workbench.trim() : undefined;
     this.#isGlobal = isGlobal ?? false;
@@ -196,6 +207,10 @@ export default class ArticleEntity {
     return this.#kanbanColumn;
   }
 
+  get language() {
+    return this.#language;
+  }
+
   toObject() {
     return {
       title: this.#title,
@@ -207,6 +222,7 @@ export default class ArticleEntity {
       status: this.#status,
       image: this.#image,
       isFeatured: this.#isFeatured,
+      language: this.#language,
       categories: this.#categories,
       workbench: this.#workbench,
       isGlobal: this.#isGlobal,

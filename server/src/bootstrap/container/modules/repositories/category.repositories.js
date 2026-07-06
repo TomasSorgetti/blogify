@@ -1,4 +1,4 @@
-import CategoryRepository from "../../../../infrastructure/database/repositories/category.repository.js";
+import CategoryRepository from "../../../../infrastructure/modules/category/category.repository.js";
 
 export const registerCategoryRepository = (container, models) => {
   container.register(

@@ -1,4 +1,4 @@
-import ArticleController from "../../../../infrastructure/http/controllers/article.controller.js";
+import ArticleController from "../../../../infrastructure/modules/article/article.controller.js";
 
 export const registerArticleControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);

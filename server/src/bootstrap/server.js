@@ -32,11 +32,10 @@ class Server {
     this.#app.use(express.json({ limit: "10mb" }));
     this.#app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-    // Compression middleware
     this.#app.use(
       compression({
         level: 6,
-        threshold: 1024, // Only compress responses > 1KB
+        threshold: 1024,
         filter: (req, res) => {
           if (req.headers["x-no-compression"]) return false;
           return compression.filter(req, res);
@@ -58,7 +57,6 @@ class Server {
       );
     }
 
-    // Request timeout handling
     this.#app.use((req, res, next) => {
       req.setTimeout(30000);
       res.setTimeout(30000);
@@ -85,18 +83,25 @@ class Server {
       fetch: new FetchRouter(dependencies),
     };
 
-    // Setup Apollo Server
     const apolloServer = new ApolloServer({
       typeDefs,
       resolvers,
     });
     await apolloServer.start();
 
+    const allowedOrigins = this.#config.env.ALLOWED_ORIGINS
+      ? this.#config.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
+      : [];
+
     this.#app.use(
       "/api",
       cors({
-        origin: function (origin, callback) {
-          callback(null, origin || true);
+        origin: (origin, callback) => {
+          if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+          } else {
+            callback(new Error(`Origin '${origin}' not allowed by CORS`));
+          }
         },
         credentials: true,
       }),
@@ -114,9 +119,15 @@ class Server {
       "/graphql",
       cors(),
       dependencies.apiKeyMiddleware.handle.bind(dependencies.apiKeyMiddleware),
+      dependencies.planLimitsMiddleware.checkApiRequestLimit(),
+      dependencies.planLimitsMiddleware.trackApiRequest(),
       expressMiddleware(apolloServer, {
         context: async ({ req }) => ({
-          ...dependencies,
+          ...this.#container.resolveMany([
+            "articleRepository",
+            "getArticlesUseCase",
+            "getArticleUseCase",
+          ]),
           user: req.user,
         }),
       }),
@@ -130,41 +141,8 @@ class Server {
     return this.#app;
   }
 
-  start() {
-    const port = this.#config.env.PORT;
-    const api_url = this.#config.env.API_URL;
-
-    this.#app.listen(port, () => {
-      console.log("- - - - - - - - - - - - - - - - -");
-      console.log(`Server running on ${api_url}`);
-      console.log("- - - - - - - - - - - - - - - - -");
-    });
-
-    // Start Redis Stream Response Listener
-    const { responseListener } = this.#config.queues;
-    const { articleRepository } = this.#container.getDependencies();
-
-    // Register handlers for events coming from the Worker
-    responseListener.on("AI_SUMMARY_COMPLETED", async (payload) => {
-      console.log(
-        `[Server] AI Summary completed for article ${payload.article_id}`,
-      );
-      try {
-        await articleRepository.updateById(payload.article_id, {
-          summary: payload.summary,
-        });
-        console.log(`[Server] Article ${payload.article_id} summary updated.`);
-      } catch (err) {
-        console.error(
-          `[Server] Failed to update article ${payload.article_id}:`,
-          err,
-        );
-      }
-    });
-
-    responseListener.start().catch((err) => {
-      console.error("[Server] Failed to start ResponseListener:", err);
-    });
+  getContainer() {
+    return this.#container;
   }
 }
 

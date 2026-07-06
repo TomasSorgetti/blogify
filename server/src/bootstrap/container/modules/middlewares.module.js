@@ -1,4 +1,5 @@
 import AuthMiddleware from "../../../infrastructure/http/middlewares/auth.middleware.js";
+import AdminMiddleware from "../../../infrastructure/http/middlewares/admin.middleware.js";
 import ApiKeyMiddleware from "../../../infrastructure/http/middlewares/apiKey.middleware.js";
 import PlanLimitsMiddleware from "../../../infrastructure/http/middlewares/planLimits.middleware.js";
 import RateLimiterMiddleware from "../../../infrastructure/http/middlewares/rateLimiter.middleware.js";
@@ -9,15 +10,17 @@ export const registerMiddlewares = (container) => {
   const subscriptionRepository = container.resolve("subscriptionRepository");
   const planRepository = container.resolve("planRepository");
   const rateLimiterService = container.resolve("rateLimiterService");
+  const analyticsRepository = container.resolve("analyticsRepository");
 
   container.register("authMiddleware", new AuthMiddleware({ jwtService }));
+  container.register("adminMiddleware", new AdminMiddleware());
   container.register(
     "apiKeyMiddleware",
     new ApiKeyMiddleware({ apiKeyRepository }),
   );
   container.register(
     "planLimitsMiddleware",
-    new PlanLimitsMiddleware({ subscriptionRepository, planRepository }),
+    new PlanLimitsMiddleware({ subscriptionRepository, planRepository, analyticsRepository }),
   );
   container.register(
     "rateLimiterMiddleware",

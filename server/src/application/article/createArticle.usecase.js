@@ -46,6 +46,7 @@ export default class CreateArticleUseCase extends UseCaseContract {
     newCategories = [],
     workbench,
     isGlobal = false,
+    language = "en",
   }) {
     if (!isGlobal) {
       const workbenchObj = await this.#workbenchRepository.findById(workbench);
@@ -112,10 +113,11 @@ export default class CreateArticleUseCase extends UseCaseContract {
       content,
       summary,
       author,
-      tags: Array.isArray(tags) ? tags.join(", ") : tags,
+      tags: Array.isArray(tags) ? tags : [],
       status: status ? status.toUpperCase() : undefined,
       image: finalImage,
       isFeatured,
+      language,
       categories: resolvedCategoryIds,
       workbench,
       isGlobal,

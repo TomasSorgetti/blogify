@@ -18,6 +18,18 @@ export default class Container {
     return this.dependencies[name];
   }
 
+  /**
+   * Resolve multiple dependencies at once.
+   * Prefer this over getDependencies() to avoid exposing the full tree.
+   * @param {string[]} names
+   */
+  resolveMany(names) {
+    return names.reduce((acc, name) => {
+      acc[name] = this.resolve(name);
+      return acc;
+    }, {});
+  }
+
   getDependencies() {
     return this.dependencies;
   }

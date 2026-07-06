@@ -1,16 +1,15 @@
 import mongoose from "mongoose";
-// schemas
-import User from "./schemas/user.schema.js";
-import Session from "./schemas/session.schema.js";
-import Subscription from "./schemas/subscription.schema.js";
-import Article from "./schemas/article.schema.js";
-import Category from "./schemas/category.schema.js";
-import Plan from "./schemas/plan.schema.js";
-import Workbench from "./schemas/workbench.schema.js";
-import Notification from "./schemas/notification.schema.js";
-import ApiKey from "./schemas/apikey.schema.js";
-import ActivityLog from "./schemas/activitylog.schema.js";
-import Analytics from "./schemas/analytics.schema.js";
+import User from "../modules/user/user.schema.js";
+import Session from "../modules/session/session.schema.js";
+import Subscription from "../modules/subscription/subscription.schema.js";
+import Article from "../modules/article/article.schema.js";
+import Category from "../modules/category/category.schema.js";
+import Plan from "../modules/plan/plan.schema.js";
+import Workbench from "../modules/workbench/workbench.schema.js";
+import Notification from "../modules/notification/notification.schema.js";
+import ApiKey from "../modules/apikey/apikey.schema.js";
+import ActivityLog from "../modules/activitylog/activitylog.schema.js";
+import Analytics from "../modules/analytics/analytics.schema.js";
 
 // seeds
 import seedPlans from "./seeds/plan.seed.js";

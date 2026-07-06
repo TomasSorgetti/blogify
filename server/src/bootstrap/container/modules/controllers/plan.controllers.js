@@ -1,4 +1,4 @@
-import PlanController from "../../../../infrastructure/http/controllers/plan.controller.js";
+import PlanController from "../../../../infrastructure/modules/plan/plan.controller.js";
 
 export const registerPlanControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);

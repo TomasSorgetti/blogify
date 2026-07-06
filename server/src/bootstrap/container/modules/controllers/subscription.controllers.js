@@ -1,4 +1,4 @@
-import SubscriptionController from "../../../../infrastructure/http/controllers/subscription.controller.js";
+import SubscriptionController from "../../../../infrastructure/modules/subscription/subscription.controller.js";
 
 export const registerSubscriptionControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);

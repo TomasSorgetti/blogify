@@ -1,4 +1,4 @@
-import CategoryController from "../../../../infrastructure/http/controllers/category.controller.js";
+import CategoryController from "../../../../infrastructure/modules/category/category.controller.js";
 
 export const registerCategoryControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);

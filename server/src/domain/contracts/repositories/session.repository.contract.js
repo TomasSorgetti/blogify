@@ -1,4 +1,10 @@
+import { enforceContract } from "../contract.helper.js";
+
 export class SessionRepositoryContract {
+  constructor() {
+    enforceContract(this, SessionRepositoryContract);
+  }
+
   async create(data) {
     throw new Error(`${this.constructor.name}: method [create] must be implemented.`);
   }

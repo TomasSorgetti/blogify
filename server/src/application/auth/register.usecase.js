@@ -46,7 +46,7 @@ export default class RegisterUseCase extends UseCaseContract {
   async execute({ username, email, password, workbench, preferences }) {
     const existingUser = await this.#userRepository.findByEmail(email);
     if (existingUser) {
-      throw new AlreadyExistsError("User allready exists");
+      throw new AlreadyExistsError("User already exists");
     }
 
     const hashedPassword = await this.#hashService.hash(password);

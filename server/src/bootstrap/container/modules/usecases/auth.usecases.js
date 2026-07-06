@@ -4,6 +4,7 @@ import VerifyUseCase from "../../../../application/auth/verify.usecase.js";
 import LogoutUseCase from "../../../../application/auth/logout.usecase.js";
 import RefreshUseCase from "../../../../application/auth/refresh.usecase.js";
 import LoginWithGoogleUseCase from "../../../../application/auth/loginWithGoogle.usecase.js";
+import ResendCodeUseCase from "../../../../application/auth/resendcode.usecase.js";
 
 export const registerAuthUseCases = (container, config) => {
   const resolveDependency = (name) => container.resolve(name);
@@ -82,6 +83,15 @@ export const registerAuthUseCases = (container, config) => {
       subscriptionFactory: resolveDependency("subscriptionFactory"),
       notificationFactory: resolveDependency("notificationFactory"),
       workbenchFactory: resolveDependency("workbenchFactory"),
+    }),
+  );
+  container.register(
+    "resendCodeUseCase",
+    new ResendCodeUseCase({
+      userRepository: resolveDependency("userRepository"),
+      jwtService: resolveDependency("jwtService"),
+      eventBus: resolveDependency("eventBus"),
+      env: config.env,
     }),
   );
 };

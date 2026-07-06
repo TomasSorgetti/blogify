@@ -1,4 +1,4 @@
-import AuthController from "../../../../infrastructure/http/controllers/auth.controller.js";
+import AuthController from "../../../../infrastructure/modules/auth/auth.controller.js";
 
 export const registerAuthControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);
@@ -12,6 +12,7 @@ export const registerAuthControllers = (container) => {
       logoutUseCase: resolveDependency("logoutUseCase"),
       refreshUseCase: resolveDependency("refreshUseCase"),
       loginWithGoogleUseCase: resolveDependency("loginWithGoogleUseCase"),
+      resendCodeUseCase: resolveDependency("resendCodeUseCase"),
     }),
   );
 };

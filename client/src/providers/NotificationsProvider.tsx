@@ -9,20 +9,23 @@ export default function NotificationsProvider({
   children: React.ReactNode;
 }) {
   const fetchNotifications = useNotificationStore(
-    (state) => state.fetchNotifications
+    (state) => state.fetchNotifications,
   );
   const addNotification = useNotificationStore(
-    (state) => state.addNotification
+    (state) => state.addNotification,
   );
+
   const user = useAuthStore((state) => state.user);
 
-  // todo=> unsuscribe?
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      return;
+    }
+
     fetchNotifications();
   }, [fetchNotifications, user]);
 
-  useNotificationsSocket(user?.id, addNotification);
+  useNotificationsSocket(user?._id, addNotification);
 
   return children;
 }

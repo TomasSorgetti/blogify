@@ -1,15 +1,15 @@
 import express from "express";
 
-import AuthRouter from "../api/auth.router.js";
-import UserRouter from "../api/user.router.js";
-import SessionRouter from "../api/session.router.js";
-import WorkbenchRouter from "../api/workbench.router.js";
-import ArticleRouter from "../api/article.router.js";
-import CategoryRouter from "../api/category.router.js";
-import SubscriptionRouter from "../api/subscription.router.js";
-import NotificationRouter from "../api/notification.router.js";
-import PlanRouter from "../api/plan.router.js";
-import ApiKeyRouter from "../api/apikey.router.js";
+import AuthRouter from "../../../modules/auth/auth.router.js";
+import UserRouter from "../../../modules/user/user.router.js";
+import SessionRouter from "../../../modules/session/session.router.js";
+import WorkbenchRouter from "../../../modules/workbench/workbench.router.js";
+import ArticleRouter from "../../../modules/article/article.router.js";
+import CategoryRouter from "../../../modules/category/category.router.js";
+import SubscriptionRouter from "../../../modules/subscription/subscription.router.js";
+import NotificationRouter from "../../../modules/notification/notification.router.js";
+import PlanRouter from "../../../modules/plan/plan.router.js";
+import ApiKeyRouter from "../../../modules/apikey/apikey.router.js";
 
 class MainRouter {
   #router;
@@ -28,6 +28,7 @@ class MainRouter {
     const userRouter = new UserRouter({
       userController: dependencies.userController,
       authMiddleware: dependencies.authMiddleware,
+      adminMiddleware: dependencies.adminMiddleware,
       rateLimiterMiddleware: dependencies.rateLimiterMiddleware,
     });
     const sessionRouter = new SessionRouter({

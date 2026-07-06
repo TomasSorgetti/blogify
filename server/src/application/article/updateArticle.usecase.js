@@ -1,4 +1,4 @@
-import { NotFoundError } from "../../domain/errors/index.js";
+import { NotFoundError, UnauthorizedError } from "../../domain/errors/index.js";
 import { UseCaseContract } from "../../domain/contracts/application/usecase.contract.js";
 export default class UpdateArticleUseCase extends UseCaseContract {
   #articleRepository;
@@ -49,7 +49,9 @@ export default class UpdateArticleUseCase extends UseCaseContract {
       }
 
       if (!hasPermission) {
-        throw new Error("You do not have permission to update articles in this workbench");
+        throw new UnauthorizedError(
+          "You do not have permission to update articles in this workbench",
+        );
       }
     }
 

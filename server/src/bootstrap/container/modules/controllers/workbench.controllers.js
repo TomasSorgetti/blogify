@@ -1,4 +1,4 @@
-import WorkbenchController from "../../../../infrastructure/http/controllers/workbench.controller.js";
+import WorkbenchController from "../../../../infrastructure/modules/workbench/workbench.controller.js";
 
 export const registerWorkbenchControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);

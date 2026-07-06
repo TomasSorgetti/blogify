@@ -1,4 +1,4 @@
-import NotificationController from "../../../../infrastructure/http/controllers/notification.controller.js";
+import NotificationController from "../../../../infrastructure/modules/notification/notification.controller.js";
 
 export const registerNotificationControllers = (container) => {
   const resolveDependency = (name) => container.resolve(name);

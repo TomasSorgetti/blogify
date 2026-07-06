@@ -42,7 +42,7 @@ export default class LoginUseCase extends UseCaseContract {
     }
 
     if (user.deletedAt) {
-      throw new NotFoundError("User allready deleted");
+      throw new NotFoundError("User already deleted");
     }
 
     const hasEmailLogin = userFound.loginMethods?.some(
